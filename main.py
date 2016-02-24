@@ -1,13 +1,40 @@
 from display import *
 from draw import *
-
-screen = new_screen()
-color = [ 0, 255, 0 ]
+import math
 
 def actual():
+    screen = new_screen()
     
+    #sun
+    color = [ 207, 123, 0 ]
+    the = 0.0
+    while the < math.pi/2:
+        draw_line(screen, 0, 0, int(XRES/4*math.cos(the)), 
+                  int(YRES/4*math.sin(the)), color)
+        the += 0.05
+    
+    #ocean liner
+    color[BLUE] = MAX_COLOR
+    color[RED] = 0
+    color[GREEN] = 0
+    y = YRES/2
+    while y < YRES:
+        draw_line(screen, 0, y, XRES, y, color)
+        color[BLUE] -= 7
+        y+=7
+
+    color[BLUE] = MAX_COLOR
+    color[RED] = 0
+    color[GREEN] = 0
+    x=0
+    while x < XRES:
+        draw_line(screen, x, YRES/2, XRES/2, YRES, color)
+        color[RED] += 2
+        color[GREEN] += 2
+        x+=7
+
     display(screen)
-    
+
 
 actual()
 
